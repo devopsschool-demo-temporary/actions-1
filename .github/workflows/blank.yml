@@ -26,15 +26,15 @@ jobs:
       - uses: actions/checkout@v4+
 
       - name: Enable build based on the changes
-	      uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
             build:
               - 'dir1/**'
-			         - 'dir3/**'
-			         - 'dir4/**'
-			         - '!dir-2/**'
+              - 'dir3/**'
+              - 'dir4/**'
+              - '!dir-2/**'
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
