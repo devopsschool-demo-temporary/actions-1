@@ -14,22 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Load the external filter file and pass it as a string to the next step
-      - name: Load path filters
-        id: load-filters
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const yaml = require('js-yaml');
-            const filters = yaml.load(fs.readFileSync('filters.yml', 'utf8'));
-            return { filters: filters.filters };
-
       - name: Enable build based on the changes
         uses: dorny/paths-filter@v3
         id: filter
         with:
-          filters: ${{ toJson(steps.load-filters.outputs.filters) }}  # Pass the loaded filters directly as JSON
+          filters: filters.yml
 
       - name: Run a one-line script RAJESH-1
         if: steps.filter.outputs.build == 'true'
@@ -45,22 +34,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Load the external filter file and pass it as a string to the next step
-      - name: Load path filters
-        id: load-filters
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const yaml = require('js-yaml');
-            const filters = yaml.load(fs.readFileSync('filters.yml', 'utf8'));
-            return { filters: filters.filters };
-
       - name: Enable build based on the changes
         uses: dorny/paths-filter@v3
         id: filter
         with:
-          filters: ${{ toJson(steps.load-filters.outputs.filters) }}  # Pass the loaded filters directly as JSON
+          filters: filters.yml
 
       - name: Run a one-line script RAJESH-3
         if: steps.filter.outputs.build == 'true'
