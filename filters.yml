@@ -1,0 +1,6 @@
+# filters.yml
+build:
+  - 'dir1/**'
+  - 'dir3/**'
+  - 'dir4/**'
+  - '!dir-2/**'
