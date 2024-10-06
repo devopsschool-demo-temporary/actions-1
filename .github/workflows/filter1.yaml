@@ -1,0 +1,61 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Load the external filter file
+      - name: Load path filters
+        id: load-filters
+        run: echo "FILTERS=$(cat filters.yml)" >> $GITHUB_ENV
+
+      - name: Enable build based on the changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: ${{ env.FILTERS }}  # Use the filters from external file
+
+      - name: Run a one-line script RAJESH-1
+        if: steps.filter.outputs.build == 'true'
+        run: echo Hello, world!
+        
+      - name: Run a one-line script RAJESH-2
+        if: steps.filter.outputs.build == 'true'
+        run: echo Hello, world!
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Load the external filter file
+      - name: Load path filters
+        id: load-filters
+        run: echo "FILTERS=$(cat filters.yml)" >> $GITHUB_ENV
+
+      - name: Enable build based on the changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: ${{ env.FILTERS }}  # Use the filters from external file
+
+      - name: Run a one-line script RAJESH-3
+        if: steps.filter.outputs.build == 'true'
+        run: echo Hello, world!
+        
+      - name: Run a one-line script RAJESH-4
+        if: steps.filter.outputs.build == 'true'
+        run: echo Hello, world!
