@@ -27,7 +27,7 @@ jobs:
           filters: |
             build:
               - '**'        # Include all files
-              - '!dir1/**'  # Exclude dir1
+              - 'dir1/**'  # Inlcude dir1
               - '!dir2/**'  # Exclude dir2
 
       - name: Show Filter Output
