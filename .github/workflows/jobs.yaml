@@ -15,7 +15,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      should_build: ${{ steps.filter.outputs.should_build }}  # Expose the filter result to other jobs
+      should_build: ${{ steps.filter.outputs.build }}  # Use the correct output from paths-filter step
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,13 +26,12 @@ jobs:
         with:
           filters: |
             build:
-              - '**'
-              - '!dir1/**'
-              - '!dir2/**'
-            
+              - '**'        # Include all files
+              - '!dir1/**'  # Exclude dir1
+              - '!dir2/**'  # Exclude dir2
 
       - name: Show Filter Output
-        run: echo "Should we build? ${{ steps.filter.outputs.should_build }}"
+        run: echo "Should we build? ${{ steps.filter.outputs.build }}"
 
   # Job 2: Run only if job1 determines a build is needed
   job2:
@@ -56,4 +55,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Job 3 Task
-        run: echo "Job 3 is running because files outside dir1 and dir2 were modified
+        run: echo "Job 3 is running because files outside dir1
