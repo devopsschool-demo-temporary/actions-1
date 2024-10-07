@@ -24,7 +24,7 @@ jobs:
           filters: |
             build:
               - 'dir1/**'   # Include changes in dir1
-              - '!dir2/**'  # Exclude changes in dir2
+              - '!dir3/**'  # Exclude changes in dir2
 
       - name: Show Filter Output
         run: echo "Should we build? ${{ steps.filter.outputs.build }}"
