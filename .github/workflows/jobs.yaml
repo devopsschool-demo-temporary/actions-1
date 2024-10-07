@@ -1,14 +1,11 @@
 name: Sample GitHub Pipeline
 
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
   push:
-    branches:
-      - master
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   # Job 1: Run paths-filter to exclude changes in dir1 and dir2
